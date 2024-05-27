@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+
+<configuration>
+	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<Pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level %logger{36} : %msg%n</Pattern>
+			<charset>UTF-8</charset>
+		</layout>
+	</appender>
+	
+	<appender name="INFO_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>c:/logs/info.log</file> <!-- 파일을 저장할 경로를 정한다 -->
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>INFO</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level %logger{35} : %msg%n</pattern> <!-- 해당 패턴 네이밍으로 현재 로그가 기록됨 -->
+			<charset>UTF-8</charset>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>c:/was-logs/info.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern> <!-- 해당 패턴 네이밍으로 이전 파일이 기록됨 -->
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize> <!-- 한 파일의 최대 용량 -->
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>180</maxHistory> <!-- 한 파일의 최대 저장 기한 -->
+		</rollingPolicy>
+	</appender>
+	
+	<appender name="WARN_LOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>c:/logs/warn.log</file>
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>WARN</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<encoder>
+			<pattern>[%d{yyyy-MM-dd HH:mm:ss}:%-3relative] %-5level %logger{35} : %msg%n</pattern>
+		</encoder>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>c:/was-logs/warn.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<maxFileSize>100MB</maxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+			<maxHistory>180</maxHistory>
+		</rollingPolicy>
+	</appender>
+	
+    <!-- Log everything in Spring Core -->
+	<logger name="com.bellock" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFO_LOG" />
+	</logger>
+  
+    <!-- jdbc log -->
+	<logger name="jdbc.sqlonly" level="INFO" additivity="false">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFO_LOG" />
+	</logger>
+	<!--
+	<logger name="jdbc.sqlonly" level="OFF">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFO_LOG" />
+	</logger>
+	-->
+	
+	<!-- log off list -->
+	<logger name="jdbc.connection" level="OFF">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFO_LOG" />
+	</logger>
+	<logger name="jdbc.sqltiming" level="OFF">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFO_LOG" />
+	</logger>
+	<logger name="jdbc.resultset" level="OFF">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFO_LOG" />
+	</logger>
+	<logger name="jdbc.resultsettable" level="OFF">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFO_LOG" />
+	</logger>
+	<logger name="jdbc.audit" level="OFF">
+		<appender-ref ref="STDOUT" />
+		<appender-ref ref="INFO_LOG" />
+	</logger>
+	
+	<!-- Root Logger -->
+	<root level="INFO">
+		<appender-ref ref="STDOUT" />
+	</root>
+	
+	<logger name="LogController" additivity="false"> <!-- 콘솔에 출력된 LogController 에 대해서 아래 작업을 실행한다.-->
+		<level value = "INFO" /> <!-- DEBUG 레벨 이상에서만 실행한다. -->
+		<appender-ref ref="INFO_LOG" />
+		<appender-ref ref="WARN_LOG" />
+	</logger>
+</configuration>
+

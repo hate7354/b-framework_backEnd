@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD SQL Map Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- Type Aliases 재정의 -->
+    <typeAliases>
+        <typeAlias alias="BwMap" type="com.bellock.framework.core.map.BwMap"/>
+        <typeAlias alias="BwObjectMap" type="com.bellock.framework.core.map.BwObjectMap"/>
+        <typeAlias alias="BwStringMap" type="com.bellock.framework.core.map.BwStringMap"/>
+    </typeAliases>
+</configuration>

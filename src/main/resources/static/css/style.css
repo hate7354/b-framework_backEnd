@@ -1,0 +1,7 @@
+textarea {
+    width:100%;
+}
+
+input[type="text"], input[type="submit"],textarea {
+    margin-top:10px;
+}

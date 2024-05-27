@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bellock.framework.web.service.login.BwLoginMapper">
+	<!-- 
+	 * 사용자정보 조회
+	 *
+	 * @param BwObjectMap 개체
+	 * @return 조회된 사용자 정보 맵
+	 -->
+    <select id="selectByUsrInfo" parameterType="BwObjectMap" resultType="BwMap">
+		SELECT  usr.usr_id
+			  , usr.mem_no
+			  , usr.usr_lgn
+			  , usr.usr_nm
+			  , usr.password
+			  , IFNULL(usr.duty_nm, '') AS duty_nm
+			  , usr.tel_no
+			  , usr.dir_tel_no
+			  , usr.phone_no
+			  , usr.fax_no
+			  , usr.email
+			  , usr.regist_ip_addr
+			  , usr.recent_login_dt
+			  , usr.task_job
+			  , IFNULL(usr.pos_nm, '') AS pos_nm
+			  , CASE WHEN usr.use_yn = 'Y' THEN '사용' ELSE '미사용' END AS useYn
+			  , usr.frst_regist_dt
+			  , usr.frst_regist_id
+			  , usr.last_update_dt
+			  , usr.last_update_id
+			  , usr.status_cd
+			  , usr.fail_cnt
+			  , usr.dpt_id
+			  , IFNULL(dpt.dpt_nm, '') AS dpt_nm
+		      , IFNULL(findAuth.auth_nm, '') AS auth_nm
+		      , findAuth.auth_id
+		      , findAuth.auth_cd
+		      , findAuth.menu_id
+		      , findAuth.menu_url
+		      , findAuth.menu_pmss
+		      , findAuth.cms_data_pmss
+		  FROM  sys_usr AS usr LEFT OUTER JOIN sys_dpt AS dpt ON usr.dpt_id = dpt.DPT_ID
+                LEFT OUTER JOIN (
+                				SELECT	authMap.usr_id,
+										auth.auth_id,
+										auth.auth_nm,
+										auth.auth_cd,
+										auth.menu_id,
+										(SELECT menu_url FROM sys_menu WHERE menu_id = auth.menu_id) menu_url,
+										pmss.menu_pmss,
+										pmss.cms_data_pmss
+                				FROM	sys_usr_auth_map authMap,
+										sys_auth auth,
+										sys_auth_permission pmss
+                				WHERE	auth.auth_id = authMap.auth_id
+                				AND		pmss.auth_cd = auth.auth_cd
+                ) findAuth ON usr.usr_id = findAuth.usr_id
+		<where>
+		<if test="usrId != null and !usrId.equals('')">
+		AND usr.usr_id = #{usrId}
+		</if>
+		<if test="usrLgn != null and !usrLgn.equals('')">
+		AND usr.usr_lgn = #{usrLgn}
+		</if>
+		<if test="infoType != null and infoType.equals('login') and interFlag.equals('false')">
+		AND usr.password = #{password}
+		AND usr.use_yn = 'Y'
+		</if>
+		</where>
+    </select>
+
+	<!-- 
+	 * 비밀번호 오류 카운터 업데이트
+	 *
+	 * @param BwObjectMap 개체
+	 -->
+	<update id="updateFailCnt" parameterType="BwObjectMap">
+		UPDATE	sys_usr
+		SET		fail_cnt = #{failCnt}
+				<if test="statusCd != null and !statusCd.equals('')">
+			  , status_cd = #{statusCd}
+				</if>
+		WHERE	usr_lgn = #{usrLgn}
+	</update>
+
+
+</mapper>

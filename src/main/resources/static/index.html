@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <link rel="icon" href="/images/favicon-32x32.png" type="image/png">
+    <title>Pilot 벨로크 프레인워크</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<script src="/js/htmx.1.9.11.js"></script>
+	<script src="/js/jquery/jquery-3.6.0.min.js"></script>
+	<script src="/js/jquery/jquery-ui.js"></script>
+	<script src="/js/jquery/jquery.form.js"></script>
+	<script src="/js/jquery/jquery.MultiFile.js"></script>
+	<script src="/js/jquery/jquery.resize.js"></script>
+	<script src="/js/bootstrap.js" type="text/javascript"></script>
+	<script src="/js/bootstrap-datepicker.js" type="text/javascript"></script>
+	<script src="/js/popper.js" type="text/javascript"></script>
+	<script src="/js/dhtmlxSuite/codebase/dhtmlx.js"></script>
+	<script src="/js/vault.unminify.js"></script>
+	<script src="/js/percircle.js" type="text/javascript"></script>
+	<script src="/js/utils/commonUtil.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonGrid.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonData.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonCombo.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonTreeView.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonChart.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonMsg.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonWindow.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonCalendar.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonUiScript.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="/js/utils/commonPieChart.js" type="text/javascript" charset="UTF-8"></script>
+	<script src="https://unpkg.com/draggabilly@2.2.0/dist/draggabilly.pkgd.min.js"></script>
+	<script src="/js/chrome-tabs.js"></script>
+	<link href="/js/dhtmlxSuite/codebase/dhtmlx.css" rel="stylesheet" type="text/css" />
+	<link href="/css/bootstrap.css" rel="stylesheet" type="text/css">
+	<link href="/css/bootstrap-datepicker.css" rel="stylesheet" type="text/css">
+	<link href="/css/all.css" rel="stylesheet" type="text/css">
+	<link href="/css/common.css" rel="stylesheet" type="text/css">
+    <link href="/css/chrome-tabs.css" rel="stylesheet">
+    <link href="/css/chrome-tabs-dark-theme.css" rel="stylesheet">
+	<link href="/css/vault.unminify.css" rel="stylesheet" type="text/css" />
+	<link href="/css/percircle.css" rel="stylesheet" type="text/css">
+</head>
+<body id="s_main" class="f17 f17v2" style="min-width:0;">
+	<div class="f17v2">
+		<div class="wrap f17w1">
+			<div class="f17w2"></div>
+			<div class="content cb41">
+				<div class="login_wrap">
+					<div id="login_area">
+						<div class="login">
+							<h2 style="font-weight:bolder; margin-bottom:50px;">벨로크-프레임워크</h2>
+							<span>B-Framework v0.0.1 서비스에 오신것을 환영합니다.</span>
+							<ul><li><input type="text" name="usrLgn" id="usrLgn" class="required" pattern="[a-zA-Z]+" value="" placeholder="아이디" autofocus></li>
+								<li><input type="password" name="password" id="password" class="required" value="" placeholder="패스워드"></li>
+								<li><button class="bt_sky wP_100" type="button" id="loginButton">로그인</button></li>
+							</ul>
+							<ul class="find_wrap">
+								<li><a href="javascript:void(0)" link="/api/reqViewFindUserPswd.do" class="find_text">비밀번호 변경</a></li>
+								<li><a href="javascript:void(0)" link="/api/reqViewFindUserId.do" class="find_text">아이디 찾기</a></li>
+								<li><a href="javascript:void(0)" link="/api/reqViewUserRegister.do" class="find_text">사용자 등록</a></li>
+							</ul>
+						</div>
+					</div>
+					<div id="login_area" style="padding: 15px 30px;">
+						<div class="login">
+							<p style="margin: 0;">※ 본 사이트에 불법적으로 접근하는 경우, 정보통신망법 등의 관련 법령에 의하여 처벌받을 수 있습니다.</p>
+							<div style="margin-top: 25px;"><h4>Copyright© Bellock Corp. All Rights Reserved.</h4></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<form name="sendFrm" id="sendFrm"></form>
+	<form name="menuFrm" id="menuFrm" target="_blank"></form>
+	<script src="/js/scripts/login.js"></script>
+</body>
+</html>
+
+<!--
+	<script src="https://unpkg.com/htmx.org@1.8.6"></script>
+-->
